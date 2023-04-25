@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "868451925281",
+    "project_id": "voiceproject-d4dad",
+    "storage_bucket": "voiceproject-d4dad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868451925281:android:7b224db1d28c6ff21fd260",
+        "android_client_info": {
+          "package_name": "com.voicetotext"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868451925281-pq3v5c4vet8enqp9us3os6hd9ql9btca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSPo9VTsJCmr1-yqPhWqfz2C2M9AIfnFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868451925281-pq3v5c4vet8enqp9us3os6hd9ql9btca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
