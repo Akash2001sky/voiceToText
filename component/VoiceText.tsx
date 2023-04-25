@@ -3,6 +3,7 @@ import {
   Alert,
   Button,
   FlatList,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -56,7 +57,7 @@ export class VoiceText extends Component<Iprops, Istate> {
     Voice.destroy().then(Voice.removeAllListeners);
   }
 
-  onSpeechStarted(e: string) {
+  onSpeechStarted(e:any) {
     this.setState({isLoading: true});
     // this.setState({ recognized: e.value });
     console.log('speechStart successful', e);
@@ -94,27 +95,16 @@ export class VoiceText extends Component<Iprops, Istate> {
 
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'center', padding: 20}}>
+      <View style={styles.mainContainer}>
         {/* <Text style={{marginBottom: 20}}>{this.state.result}</Text> */}
         <TextInput
           placeholder="Speak something..."
-          style={{
-            height: 100,
-            borderWidth: 1,
-            borderRadius: 10,
-            marginBottom: 10,
-          }}
+          style={styles.textInput}
           value={this.state.result}
         />
         <TouchableOpacity
           onPress={() => this.startRecognizing()}
-          style={{
-            backgroundColor: '#000000',
-            height: 30,
-            borderRadius: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+          style={styles.BtnStart}>
           {this.state.isLoading ? (
             <ActivityIndicator size="large" color="white" />
           ) : (
@@ -126,40 +116,17 @@ export class VoiceText extends Component<Iprops, Istate> {
             this.setState({isLoading: false});
             this.stopRecognizing();
           }}
-          style={{
-            backgroundColor: '#e93a28',
-            height: 30,
-            borderRadius: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginVertical: 10,
-          }}>
+          style={styles.BtnStop}>
           <Text style={{color: '#ffffff'}}>Stop</Text>
         </TouchableOpacity>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TouchableOpacity
             onPress={() => this.clear()}
-            style={{
-              backgroundColor: '#e93a28',
-              height: 30,
-              borderRadius: 10,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginVertical: 10,
-              width: 100,
-            }}>
+            style={styles.BtnClear}>
             <Text style={{color: '#ffffff'}}>clear</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              backgroundColor: '#007ec6',
-              height: 30,
-              borderRadius: 10,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginVertical: 10,
-              width: 100,
-            }}
+            style={styles.BtnUpdate}
             onPress={() => {
               const newReference = database().ref('/User').push();
               if (this.state.result.length > 1) {
@@ -178,15 +145,7 @@ export class VoiceText extends Component<Iprops, Istate> {
             <Text style={{color: '#ffffff'}}>UpdateToDB</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              backgroundColor: '#e93a28',
-              height: 30,
-              borderRadius: 10,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginVertical: 10,
-              width: 100,
-            }}
+            style={styles.BtnCleardb}
             onPress={async () => {
               await database().ref('/User').remove();
             }}>
@@ -209,3 +168,56 @@ export class VoiceText extends Component<Iprops, Istate> {
 }
 
 export default VoiceText;
+const styles=StyleSheet.create({
+  mainContainer:{flex: 1, justifyContent: 'center', padding: 20},
+  textInput:{
+    height: 100,
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  BtnStart:{
+    backgroundColor: '#000000',
+    height: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  BtnStop:{
+    backgroundColor: '#e93a28',
+    height: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  BtnClear:{
+    backgroundColor: '#e93a28',
+    height: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    width: 100,
+  },
+  BtnUpdate:{
+    backgroundColor: '#007ec6',
+    height: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    width: 100,
+  },
+  BtnCleardb:{
+    backgroundColor: '#e93a28',
+    height: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    width: 100,
+  }
+
+
+})
